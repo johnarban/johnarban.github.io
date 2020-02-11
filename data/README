@@ -1,0 +1,7 @@
+Files are in standard compressed FITS format. 
+They can be read directly by DS9, astropy.io.fits, CFITSIO, etc. 
+If your software requires them to be unpacked, LCO Observatory provides
+details on how to do so here https://lco.global/education/observing/fpack/
+
+planck_herschel_fit.fits.fz : Herschel tau, tdust, beta with errors at 38" resolution
+
