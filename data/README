@@ -1,7 +1,26 @@
-Files are in standard compressed FITS format. 
-They can be read directly by DS9, astropy.io.fits, CFITSIO, etc. 
+Files are in standard compressed FITS format.
+They can be read directly by DS9, astropy.io.fits, CFITSIO, etc.
 If your software requires them to be unpacked, LCO Observatory provides
 details on how to do so here https://lco.global/education/observing/fpack/
 
-planck_herschel_fit.fits.fz : Herschel tau, tdust, beta with errors at 38" resolution
+When using this data please cite
+2017A&A...606A.100L
 
+planck_herschel_fit.fits.fz : Herschel tau, tdust, beta with errors at 36" resolution
+
+To convert from \tau_353 to K-band extinction (Ak)
+please cite and use 2017A&A...606A.100L
+Ak = 3595 * \tau_353
+For additional details please see the associate paper.
+
+
+File 'planck_herschel_fit.fits.fz' header:
+
+CONTENTS:
+PLANE1  = 'tau     '           /Opacity at 353 GHz
+PLANE2  = 'Err(tau)'           /Error on opacity at 353 GHz
+PLANE3  = 'T'                  /Color temperature [K]
+PLANE4  = 'Err(T)  '           /Error on color temperature [K]
+PLANE5  = 'beta    '           /Modified black-body exponente (Planck)
+PLANE6  = 'Err(beta)'          /Error on modified black-body exponent
+PLANE7  = 'chi^2   '           /Total chi-square of the SED fit
