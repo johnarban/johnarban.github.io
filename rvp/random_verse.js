@@ -12,7 +12,7 @@ $().ready(function () {
     $.getJSON("msg.json", function (data) {
         var i = '30044'
         length = 0;
-        while (length < 10) {
+        while (length < 5) {
             i = randomProperty(data['text'])
             length = data['text'][i].split(" ").length
         }
