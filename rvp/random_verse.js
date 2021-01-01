@@ -1,37 +1,38 @@
-// const fs = require('fs')
 
-// let out = fs.readFile('./nkjv.json', 'utf8', (err, data) => {
-//     if (err) {
-//         console.log("File read failed:", err)
-//         return
-//     }
-
-//     var randomProperty = function (obj) {
-//         var keys = Object.keys(obj);
-//         return keys[keys.length * Math.random() << 0];
-//     };
-
-//     let bible = JSON.parse(data)
-//     let i = randomProperty(bible.text)
-//     // console.log(`${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]} (NKJV)\n ${bible.text[i]}`)
-//     return `${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]} (NKJV)\n ${bible.text[i]}`;
-// });
-
+// https://stackoverflow.com/a/15106541
+//  get a random value
 var randomProperty = function (obj) {
     var keys = Object.keys(obj);
     return keys[keys.length * Math.random() << 0];
 };
 
+
+// https://code-maven.com/javascript-on-github-pages
+// get random verse and output a string
 $().ready(function () {
-    $.getJSON("nkjv.json", function (data) {
-        console.log(data);
-        // let bible = JSON.parse(data)
-        let i = randomProperty(data['text'])
-        $("#text").html(`<h2>${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]} (NKJV)</h2>\n ${data['text'][i]}`);
+    $.getJSON("msg.json", function (data) {
+        var i = '30044'
+        length = 0;
+        while (length < 10) {
+            i = randomProperty(data['text'])
+            length = data['text'][i].split(" ").length
+        }
+        j = parseInt(i) + 1;
+        j = j.toString();
+        consec = parseInt(data['verse'][i]) == parseInt(data['verse'][j]) - 1;
+        endch = parseInt(data['verse'][j]) == 1;
+        text = data['text'][i].replace(/  +/g, '\n');
+        if (consec || (!consec && endch)) {
+            // console.log(`${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}\n ${text}`)
+            $("#text").html(`<h2>${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]} (MSG)</h2>\n ${data['text'][i]}`);
+            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['chapter'][i]}:${data['verse'][i]}">BibleGateway</a>`);
+        } else {
+            nextv = (parseInt(data['verse'][j]) - 1).toString()
+            // console.log(`${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}\n ${text}`)
+            $("#text").html(`<h2>${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}-${nextv} (MSG)</h2>\n ${data['text'][i]}`);
+            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['chapter'][i]}:${data['verse'][i]}-${nextv}">BibleGateway</a>`);
+        };
+
     });
 });
 
-// var randomProperty = function (obj) {
-//     var keys = Object.keys(obj);
-//     return obj[keys[ keys.length * Math.random() << 0]];
-// };
