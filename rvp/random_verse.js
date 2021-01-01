@@ -1,4 +1,3 @@
-
 // https://stackoverflow.com/a/15106541
 //  get a random value
 var randomProperty = function (obj) {
@@ -25,14 +24,13 @@ $().ready(function () {
         if (consec || (!consec && endch)) {
             // console.log(`${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}\n ${text}`)
             $("#text").html(`<h2>${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]} (Message version)</h2>\n ${data['text'][i]}`);
-            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['chapter'][i]}:${data['verse'][i]}">BibleGateway</a>`);
+            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['book'][i]}+${data['chapter'][i]}:${data['verse'][i]}&version=MSG">BibleGateway</a>`);
         } else {
             nextv = (parseInt(data['verse'][j]) - 1).toString()
             // console.log(`${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}\n ${text}`)
             $("#text").html(`<h2>${data['book'][i]}  ${data['chapter'][i]}:${data['verse'][i]}-${nextv} (Message version)</h2>\n ${data['text'][i]}`);
-            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['chapter'][i]}:${data['verse'][i]}-${nextv}">BibleGateway</a>`);
+            $('#link').html(`<a href="https://www.biblegateway.com/passage/?search=${data['book'][i]}+${data['chapter'][i]}:${data['verse'][i]}-${nextv}&version=MSG">BibleGateway</a>`);
         };
 
     });
 });
-
