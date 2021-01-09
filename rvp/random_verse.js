@@ -64,7 +64,7 @@ function randomProperty(obj) {
 // get random verse and output a string
 $().ready(function () {
     // console.log(document.getElementById('bibleversion').value)
-    $.getJSON('nkjv.json', function (bible) {
+    $.getJSON("nkjv.json", function (bible) {
 
         var i = '30044'
         length = 0;
