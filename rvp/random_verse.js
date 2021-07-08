@@ -55,7 +55,7 @@ function randomValue(uniform = false) {
 //  get a random value
 function randomProperty(obj) {
   var keys = Object.keys(obj);
-  return keys[keys.length * randomValue(uniform=false) << 0];
+  return keys[keys.length * randomValue(uniform=true) << 0];
 };
 
 
