@@ -1,5 +1,3 @@
-
-
 // https://stackoverflow.com/a/64354200
 function randomTruncSkewNormal({
   rng = Math.random,
@@ -42,21 +40,25 @@ function randomTruncSkewNormal({
   }
 
   return randomSkewNormal(rng, mean, stdDev, skew);
-};
+}
 
 function randomValue(uniform = false) {
   if (uniform) {
-    return Math.random()
+    return Math.random();
   }
-  return randomTruncSkewNormal({ range: [0.0, 1.0], mean: 0.5, stdDev: 0.5 / 2 })
+  return randomTruncSkewNormal({
+    range: [0.0, 1.0],
+    mean: 0.5,
+    stdDev: 0.5 / 2
+  });
 }
 
 // https://stackoverflow.com/a/15106541
 //  get a random value
 function randomProperty(obj) {
   var keys = Object.keys(obj);
-  return keys[keys.length * randomValue(uniform=true) << 0];
-};
+  return keys[keys.length * randomValue(uniform = true) << 0];
+}
 
 
 
@@ -65,28 +67,28 @@ function randomProperty(obj) {
 $().ready(function () {
   console.log("Inside function");
   $.getJSON("nkjv.json", function (bible) {
-    var i = '30044'
+    var i = '30044';
     length = 0;
     while (length < 5) {
-      i = randomProperty(bible['text'])
-      length = bible['text'][i].split(" ").length
+      i = randomProperty(bible.text);
+      length = bible.text[i].split(" ").length;
     }
     j = parseInt(i) + 1;
     j = j.toString();
-    console.log(`i=${i}`)
-    consec = parseInt(bible['verse'][i]) == parseInt(bible['verse'][j]) - 1;
-    endch = parseInt(bible['verse'][j]) == 1;
-    text = bible['text'][i].replace(/  +/g, '\n');
+    console.log(`i=${i}`);
+    consec = parseInt(bible.verse[i]) == parseInt(bible.verse[j]) - 1;
+    endch = parseInt(bible.verse[j]) == 1;
+    text = bible.text[i].replace(/  +/g, '\n');
     if (consec || (!consec && endch)) {
-      console.log(`${bible['book'][i]}  ${bible['chapter'][i]}:${bible['verse'][i]}\n ${text}`)
-      $("#text").html(`<h2>${bible['book'][i]}  ${bible['chapter'][i]}:${bible['verse'][i]} (NKJV)</h2>\n ${bible['text'][i]}`);
-      $('#link').html(`<a target="_blank" href="https://www.biblegateway.com/passage/?search=${bible['book'][i]}+${bible['chapter'][i]}:${bible['verse'][i]}&version=MSG;NKJV">BibleGateway</a>`);
+      console.log(`${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]}\n ${text}`);
+      $("#text").html(`<h2>${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]} (NKJV)</h2>\n ${bible.text[i]}`);
+      $('#link').html(`<a target="_blank" href="https://www.biblegateway.com/passage/?search=${bible.book[i]}+${bible.chapter[i]}:${bible.verse[i]}&version=MSG;NKJV">BibleGateway</a>`);
     } else {
-      nextv = (parseInt(bible['verse'][j]) - 1).toString()
-      console.log(`${bible['book'][i]}  ${bible['chapter'][i]}:${bible['verse'][i]}\n ${text}`)
-      $("#text").html(`<h2>${bible['book'][i]}  ${bible['chapter'][i]}:${bible['verse'][i]}-${nextv} (NKJV)</h2>\n ${bible['text'][i]}`);
-      $('#link').html(`<a target="_blank" href="https://www.biblegateway.com/passage/?search=${bible['book'][i]}+${bible['chapter'][i]}:${bible['verse'][i]}-${nextv}&version=MSG;NKJV">BibleGateway</a>`);
-    };
+      nextv = (parseInt(bible.verse[j]) - 1).toString();
+      console.log(`${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]}\n ${text}`);
+      $("#text").html(`<h2>${bible.book[i]}  ${bible.chapter[i]}:${bible.verse[i]}-${nextv} (NKJV)</h2>\n ${bible.text[i]}`);
+      $('#link').html(`<a target="_blank" href="https://www.biblegateway.com/passage/?search=${bible.book[i]}+${bible.chapter[i]}:${bible.verse[i]}-${nextv}&version=MSG;NKJV">BibleGateway</a>`);
+    }
 
   });
 });
